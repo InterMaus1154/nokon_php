@@ -8,7 +8,6 @@ class App extends Singleton
 {
     private mixed $services = [];
 
-
     /**
      * Register a service to the app
      * @param string $serviceKey

@@ -10,9 +10,10 @@ class View
 
     /**
      * @param string $name - name of the view
-     * @return void
+     * @param array $data
+     * @return View
      */
-    public static function make(string $name, $data = []): View
+    public static function make(string $name, array $data = []): View
     {
         /**
          * Check if defined views directory exists
