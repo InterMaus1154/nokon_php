@@ -21,5 +21,3 @@ Route::post('/test', function(){
 Route::get('/submitted', function(){
    echo "Thanks for submitting";
 });
-
-app()->removeService('router');
