@@ -41,8 +41,8 @@ if (!function_exists('redirect')) {
     function redirect(string | null $url = null, int $status = 302, bool $replace = true):\Core\Redirect
     {
         if(!isset($url)){
-            return app('redirect');
+            return \Core\Redirect::getInstance();
         }
-        return app('redirect')->to($url, $status, $replace);
+        return \Core\Redirect::to($url, $status, $replace);
     }
 }
