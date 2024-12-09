@@ -8,8 +8,15 @@ class Redirect extends Singleton
     {
     }
 
-    public static function to($url): void
+    /**
+     * Redirect to a specific url
+     * @param string $url
+     * @return Redirect
+     */
+    public static function to(string $url): Redirect
     {
         header("Location: {$url}", true, 302);
+        return self::getInstance();
     }
+
 }
