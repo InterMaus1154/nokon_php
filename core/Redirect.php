@@ -1,22 +1,36 @@
 <?php
 
 namespace Core;
-use Core\Singleton;
+
 class Redirect extends Singleton
 {
     protected function __construct()
     {
+        parent::__construct();
     }
 
     /**
      * Redirect to a specific url
      * @param string $url
+     * @param int $status
+     * @param bool $replace
      * @return Redirect
      */
-    public static function to(string $url): Redirect
+    public static function to(string $url, int $status = 302, bool $replace = true): Redirect
     {
-        header("Location: {$url}", true, 302);
+        header("Location: {$url}", $replace, $status);
         return self::getInstance();
+    }
+
+    /**
+     * @return Redirect
+     */
+    public static function back(): Redirect
+    {
+        if ($_SERVER['HTTP_REFERER']) {
+            return self::to($_SERVER['HTTP_REFERER']);
+        }
+        return self::to('/');
     }
 
 }

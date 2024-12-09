@@ -23,5 +23,9 @@ Route::get('/submitted', function () {
 });
 
 Route::get('/hello-world', function () {
-    echo "hello world";
+
+});
+
+Route::get('/redirected', function () {
+    \Core\Redirect::back();
 });

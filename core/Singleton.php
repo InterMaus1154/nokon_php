@@ -4,7 +4,7 @@ namespace Core;
 
 abstract class Singleton
 {
-    private function __construct()
+    protected function __construct()
     {}
 
     private function __clone(): void

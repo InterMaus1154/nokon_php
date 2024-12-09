@@ -21,7 +21,7 @@ class Router extends Singleton
 
     public function dispatch(): void
     {
-        $requestUri = $_SERVER['REQUEST_URI'];
+        $requestUri =  parse_url($_SERVER['REQUEST_URI'])['path'];
         $requestMethod = $_SERVER['REQUEST_METHOD'];
 
         foreach (self::$routes as $route){
