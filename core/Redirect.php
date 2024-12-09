@@ -33,4 +33,13 @@ class Redirect extends Singleton
         return self::to('/');
     }
 
+    public static function withMessage(string $key, mixed $data): Redirect
+    {
+        if(session_status() !== PHP_SESSION_ACTIVE){
+            session_start();
+        }
+        $_SESSION[$key] = $data;
+        return self::getInstance();
+    }
+
 }

@@ -38,8 +38,11 @@ if (!function_exists('app')) {
 }
 
 if (!function_exists('redirect')) {
-    function redirect(string $url):void
+    function redirect(string | null $url = null, int $status = 302, bool $replace = true):\Core\Redirect
     {
-        app('redirect')->to($url);
+        if(!isset($url)){
+            return app('redirect');
+        }
+        return app('redirect')->to($url, $status, $replace);
     }
 }

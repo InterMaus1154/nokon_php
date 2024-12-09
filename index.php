@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 require "core/helper.php";
 require "core/View.php";
 require "core/App.php";

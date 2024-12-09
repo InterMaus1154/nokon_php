@@ -1,6 +1,7 @@
 <?php
 
 use Core\Route;
+use Core\Redirect;
 
 Route::get('/', function () {
     view('dashboard');
@@ -23,9 +24,9 @@ Route::get('/submitted', function () {
 });
 
 Route::get('/hello-world', function () {
-
+    echo "hello world";
 });
 
 Route::get('/redirected', function () {
-    \Core\Redirect::back();
+    redirect()->back()->withMessage('test', 'hello2');
 });
