@@ -46,3 +46,15 @@ if (!function_exists('redirect')) {
         return app('redirect')->to($url, $status, $replace);
     }
 }
+
+
+if(!function_exists('session')){
+
+    function session(string $key = null, mixed $default = null){
+        if(isset($key)){
+            return app('session')->get($key, $default);
+        }
+
+        return app('session');
+    }
+}
