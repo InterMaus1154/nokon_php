@@ -15,8 +15,15 @@ Route::get('/projects', function () {
     view('projects');
 });
 
-Route::post('/test', function () {
-    redirect("/submitted");
+Route::get('/test', function () {
+    $height = 5;
+    \Core\Session::put('height', $height);
+    $value = \Core\Session::get('height', 4);
+    echo $value;
+    \Core\Session::remove('height');
+    $value = \Core\Session::get('height', 4);
+    echo $value;
+
 });
 
 Route::get('/submitted', function () {
