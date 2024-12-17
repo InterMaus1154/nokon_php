@@ -13,7 +13,6 @@
                 <input name="name" />
                 <input type="submit" />
             </form>
-            <?= session('var'); ?>
         </div>
     </main>
 </div>

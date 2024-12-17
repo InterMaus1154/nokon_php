@@ -41,6 +41,10 @@ class Response extends Singleton
         return self::getInstance();
     }
 
+    /**
+     * @param mixed $data
+     * @return Response
+     */
     public static function rawEval(mixed $data): Response
     {
         eval($data);
