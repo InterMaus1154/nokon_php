@@ -13,7 +13,7 @@
                 <input name="name" />
                 <input type="submit" />
             </form>
-            <?= $name; ?>
+            <?= session('var'); ?>
         </div>
     </main>
 </div>

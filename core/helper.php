@@ -4,7 +4,7 @@ use JetBrains\PhpStorm\NoReturn;
 
 if (!function_exists('dd')) {
     #[NoReturn]
-    function dd(mixed $data, string | null $message = null): void
+    function dd(mixed $data, string|null $message = null): void
     {
         echo "<pre>";
         $data != null ? var_dump($data) : null;
@@ -21,9 +21,9 @@ if (!function_exists('urlIs')) {
 }
 
 if (!function_exists('view')) {
-    function view($name, $data = []): \Core\View
+    function view($name, $data = []): \Core\Response
     {
-        return \Core\View::make($name, $data);
+        return \Core\Response::view($name, $data);
     }
 }
 
@@ -56,5 +56,12 @@ if (!function_exists('session')) {
         }
 
         return app('session');
+    }
+}
+
+if (!function_exists('response')) {
+    function response(): \Core\Response
+    {
+        return \Core\Response::getInstance();
     }
 }

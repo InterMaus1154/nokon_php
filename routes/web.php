@@ -5,5 +5,6 @@ use Core\Redirect;
 use Core\Response;
 
 Route::get('/', function (){
-    return Response::view('dashboard', ['name' => 'Johnson']);
+    session()->put('var', 2);
+    return response()->raw($var);
 });
