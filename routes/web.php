@@ -6,5 +6,5 @@ use Core\Response;
 
 Route::get('/', function (){
     session()->put('var', 2);
-    return response()->raw($var);
+    return response()->raw();
 });

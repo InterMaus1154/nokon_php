@@ -19,7 +19,7 @@ use Core\Response;
 $app = App::getInstance();
 
 $app->registerService('router', Router::getInstance());
-$app->registerService('routes', require "routes/web.php");
+$app->registerService('routes', require("routes/web.php"));
 $app->registerService('redirect', Redirect::getInstance());
 $app->registerService('session', Session::getInstance());
 $app->registerService('response', Response::getInstance());
