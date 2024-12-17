@@ -13,6 +13,7 @@
                 <input name="name" />
                 <input type="submit" />
             </form>
+            <?= $name; ?>
         </div>
     </main>
 </div>

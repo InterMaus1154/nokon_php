@@ -4,13 +4,12 @@ use JetBrains\PhpStorm\NoReturn;
 
 if (!function_exists('dd')) {
     #[NoReturn]
-    function dd($message, $value = null): void
+    function dd(mixed $data, string | null $message = null): void
     {
-        echo $message;
         echo "<pre>";
-        $value != null ? var_dump($value) : null;
+        $data != null ? var_dump($data) : null;
         echo "</pre>";
-        die;
+        die($message ?? null);
     }
 }
 
@@ -22,9 +21,9 @@ if (!function_exists('urlIs')) {
 }
 
 if (!function_exists('view')) {
-    function view($name, $data = [])
+    function view($name, $data = []): \Core\View
     {
-        \Core\View::make($name, $data)->show();
+        return \Core\View::make($name, $data);
     }
 }
 
@@ -38,9 +37,9 @@ if (!function_exists('app')) {
 }
 
 if (!function_exists('redirect')) {
-    function redirect(string | null $url = null, int $status = 302, bool $replace = true):\Core\Redirect
+    function redirect(string|null $url = null, int $status = 302, bool $replace = true): \Core\Redirect
     {
-        if(!isset($url)){
+        if (!isset($url)) {
             return app('redirect');
         }
         return app('redirect')->to($url, $status, $replace);
@@ -48,10 +47,11 @@ if (!function_exists('redirect')) {
 }
 
 
-if(!function_exists('session')){
+if (!function_exists('session')) {
 
-    function session(string $key = null, mixed $default = null){
-        if(isset($key)){
+    function session(string $key = null, mixed $default = null)
+    {
+        if (isset($key)) {
             return app('session')->get($key, $default);
         }
 

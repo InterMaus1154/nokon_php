@@ -1,10 +1,13 @@
 <?php
+
 namespace Core;
 require "helper.php";
+
 class View
 {
     private function __construct(private readonly string $file, private array $data = [])
-    {}
+    {
+    }
 
     public static $VIEW_DIRECTORY = __DIR__ . '/../views/';
 
@@ -18,15 +21,15 @@ class View
         /**
          * Check if defined views directory exists
          */
-        if(!is_dir(self::$VIEW_DIRECTORY)){
+        if (!is_dir(self::$VIEW_DIRECTORY)) {
             dd("Views directory doesn't exist at the following location:", self::$VIEW_DIRECTORY);
         }
 
-        $file =  self::$VIEW_DIRECTORY.$name.'.View.php';
+        $file = self::$VIEW_DIRECTORY . $name . '.View.php';
         /**
          * Check if requested view file exists at base directory
          */
-        if(!file_exists($file)){
+        if (!file_exists($file)) {
             dd("Requested view doesn't exist", $name);
         }
 
@@ -39,10 +42,11 @@ class View
      */
     public function show(): void
     {
-        if(!empty($this->data))
-        {
-            extract($this->data);
-        }
-        include $this->file;
+        (function () {
+            if (!empty($this->data)) {
+                extract($this->data);
+            }
+            include $this->file;
+        })();
     }
 }
