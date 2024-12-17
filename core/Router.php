@@ -2,15 +2,18 @@
 
 namespace Core;
 
-use Core\Singleton;
-
 class Router extends Singleton
 {
-    protected function __construct(){
+    private function test()
+    {
+    }
+
+    protected function __construct()
+    {
         parent::__construct();
     }
 
-    public static $routes = [];
+    public static array $routes = [];
 
     public function addRoute(string $method, string $uri, callable $action): void
     {
@@ -21,17 +24,27 @@ class Router extends Singleton
         ];
     }
 
-    public function dispatch(): void
+    /**
+     * @return Response
+     */
+    public function dispatch(): Response
     {
-        $requestUri =  parse_url($_SERVER['REQUEST_URI'])['path'];
+        $requestUri = parse_url($_SERVER['REQUEST_URI'])['path'];
         $requestMethod = $_SERVER['REQUEST_METHOD'];
 
-        foreach (self::$routes as $route){
-            if($route['method'] === $requestMethod && $route['uri'] === $requestUri){
-                if(is_callable($route['action'])){
-                    call_user_func($route['action']);
-                    return;
+        foreach (self::$routes as $route) {
+            if ($route['method'] === $requestMethod && $route['uri'] === $requestUri) {
+                $action = $route['action'];
+                if (is_callable($action)) {
+                    $result = call_user_func($action);
+                    if(!($result instanceof Response)){
+                        http_response_code(406);
+                        $seenType = gettype($result);
+                        die("[406] Path {$requestUri} must return Core\Response, but '$seenType' given");
+                    }
+                    return $result;
                 }
+
             }
         }
         http_response_code(404);

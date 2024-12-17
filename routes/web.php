@@ -16,11 +16,9 @@ Route::get('/projects', function () {
 });
 
 Route::get('/test', function () {
-    $testValue = 4;
-    session()->put('test-value', $testValue);
-
-    $storedValue = session('test-value', -1);
-    echo $storedValue;
+    $height = 5;
+    app('session')->put('height', $height);
+    echo app('session')->get('height');
 
 });
 
