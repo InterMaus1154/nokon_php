@@ -37,10 +37,11 @@ class Router extends Singleton
                 $action = $route['action'];
                 if (is_callable($action)) {
                     $result = call_user_func($action);
-                    if(!($result instanceof Response)){
+                    if (!($action instanceof Response)) {
                         http_response_code(406);
                         $seenType = gettype($result);
-                        die("[406] Path {$requestUri} must return Core\Response, but '$seenType' given");
+                        session()->put('app_500_error_data_internal', "[406] Path {$requestUri} must return Core\Response, but '$seenType' given");
+                        die;
                     }
                     return $result;
                 }

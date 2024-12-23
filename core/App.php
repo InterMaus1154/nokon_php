@@ -78,6 +78,9 @@ class App extends Singleton
             http_response_code(500);
             die("Router not found");
         }
+        Route::get('/error', function(){
+           return Response::raw(session('app_500_error_data_internal', ""));
+        });
         $this->getService('router')->dispatch();
     }
 }
