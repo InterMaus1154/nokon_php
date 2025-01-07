@@ -17,7 +17,6 @@ class Response extends Singleton
     public static function view(string $view, mixed $data = []): Response
     {
         View::make($view, $data)->show();
-
         return self::getInstance();
     }
 
