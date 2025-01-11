@@ -6,7 +6,24 @@ use Core\Singleton;
 
 class App extends Singleton
 {
-    private mixed $services = [];
+    /**
+     * View directory
+     */
+    public static string $VIEW_DIRECTORY = __DIR__ . '/../views/';
+
+    public static string $SYSTEM_VIEW_DIRECTORY = __DIR__ . '/../core/views/';
+    private array $services = [];
+
+    /**
+     * Change the directory used to resolve views
+     * Default: root/views
+     * @param string $viewDirectory
+     * @return void
+     */
+    public function setViewDirectory(string $viewDirectory): void
+    {
+        self::$VIEW_DIRECTORY = $viewDirectory;
+    }
 
     /**
      * Register a service to the app
@@ -78,9 +95,6 @@ class App extends Singleton
             http_response_code(500);
             die("Router not found");
         }
-        Route::get('/error', function(){
-           return Response::raw(session('app_500_error_data_internal', ""));
-        });
         $this->getService('router')->dispatch();
     }
 }

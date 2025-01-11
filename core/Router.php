@@ -2,6 +2,8 @@
 
 namespace Core;
 
+use Core\ReturnTypes;
+
 class Router extends Singleton
 {
     private function test()
@@ -25,9 +27,9 @@ class Router extends Singleton
     }
 
     /**
-     * @return Response
+     * @return void
      */
-    public function dispatch(): Response
+    public function dispatch(): void
     {
         $requestUri = parse_url($_SERVER['REQUEST_URI'])['path'];
         $requestMethod = $_SERVER['REQUEST_METHOD'];
@@ -35,20 +37,21 @@ class Router extends Singleton
         foreach (self::$routes as $route) {
             if ($route['method'] === $requestMethod && $route['uri'] === $requestUri) {
                 $action = $route['action'];
-                if (is_callable($action)) {
-                    $result = call_user_func($action);
-                    if (!($action instanceof Response)) {
-                        http_response_code(406);
-                        $seenType = gettype($result);
-                        session()->put('app_500_error_data_internal', "[406] Path {$requestUri} must return Core\Response, but '$seenType' given");
-                        die;
-                    }
-                    return $result;
+                try{
+                    $reflection = new \ReflectionFunction($action);
+                }catch (\ReflectionException $e){
+                    die($e->getMessage());
                 }
-
+                switch ($reflection->getReturnType()?->getName()){
+                    case ReturnTypes::VIEW->value:
+                        $reflection->invoke()->show();
+                        break;
+                    case ReturnTypes::RESPONSE->value:
+                        $reflection->invoke();
+                        break;
+                }
             }
         }
         http_response_code(404);
-        die("Page not found!");
     }
 }

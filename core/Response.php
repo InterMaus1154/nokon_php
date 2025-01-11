@@ -11,14 +11,14 @@ class Response extends Singleton
 
     /**
      * @param string $view
-     * @param mixed $data
-     * @return Response
+     * @param mixed $data - optional data
+     * @return View
      */
-    public static function view(string $view, mixed $data = []): Response
+    public static function view(string $view, mixed $data = []): View
     {
-        View::make($view, $data)->show();
-        return self::getInstance();
+        return View::make($view, $data);
     }
+
 
     /**
      * @param mixed $data

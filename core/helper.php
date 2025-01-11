@@ -1,5 +1,6 @@
 <?php
 
+use Core\View;
 use JetBrains\PhpStorm\NoReturn;
 
 if (!function_exists('dd')) {
@@ -21,9 +22,9 @@ if (!function_exists('urlIs')) {
 }
 
 if (!function_exists('view')) {
-    function view($name, $data = []): \Core\Response
+    function view($name, $data = []): View
     {
-        return \Core\Response::view($name, $data);
+        return View::make($name, $data);
     }
 }
 

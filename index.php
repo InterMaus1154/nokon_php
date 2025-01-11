@@ -9,6 +9,7 @@ require "core/Route.php";
 require "core/Redirect.php";
 require "core/Session.php";
 require "core/Response.php";
+require "core/helper_return.php";
 
 use Core\App;
 use Core\Router;
@@ -19,7 +20,7 @@ use Core\Response;
 $app = App::getInstance();
 
 $app->registerService('router', Router::getInstance());
-$app->registerService('routes', require("routes/web.php"));
+$app->registerService('routes', require_once("routes/web.php"));
 $app->registerService('redirect', Redirect::getInstance());
 $app->registerService('session', Session::getInstance());
 $app->registerService('response', Response::getInstance());

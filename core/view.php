@@ -9,23 +9,24 @@ class View
     {
     }
 
-    public static $VIEW_DIRECTORY = __DIR__ . '/../views/';
-
     /**
      * @param string $name - name of the view
-     * @param array $data
+     * @param array $data - optional data to pass to the view
+     * @param bool $systemView - false by default
      * @return View
      */
-    public static function make(string $name, array $data = []): View
+    public static function make(string $name, array $data = [], bool $systemView = false): View
     {
+        $viewDirectory = !$systemView ? App::$VIEW_DIRECTORY : App::$SYSTEM_VIEW_DIRECTORY;
+
         /**
          * Check if defined views directory exists
          */
-        if (!is_dir(self::$VIEW_DIRECTORY)) {
-            dd("Views directory doesn't exist at the following location:", self::$VIEW_DIRECTORY);
+        if (!is_dir($viewDirectory)) {
+            dd("Views directory doesn't exist at the following location:", $viewDirectory);
         }
 
-        $file = self::$VIEW_DIRECTORY . $name . '.View.php';
+        $file = $viewDirectory . $name . '.view.php';
         /**
          * Check if requested view file exists at base directory
          */
