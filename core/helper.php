@@ -24,7 +24,7 @@ if (!function_exists('urlIs')) {
 if (!function_exists('view')) {
     function view($name, $data = []): View
     {
-        return View::make($name, $data);
+        return View::prepare($name, $data);
     }
 }
 

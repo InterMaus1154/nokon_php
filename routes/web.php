@@ -6,12 +6,10 @@ use Core\View;
 use Core\Response;
 
 Route::get('/', function () {
-    return view('dashboard');
+    return View::prepare('dashboard');
 });
 
-Route::get('/', function(): View|Response{
-    if(true){
-        return Response::raw("hello world");
-    }
-    return View::make('dashboard');
+
+Route::post('/test', function(){
+    echo "test";
 });

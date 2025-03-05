@@ -16,7 +16,7 @@ class Response extends Singleton
      */
     public static function view(string $view, mixed $data = []): View
     {
-        return View::make($view, $data);
+        return View::prepare($view, $data);
     }
 
 

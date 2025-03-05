@@ -2,8 +2,11 @@
 
 namespace Core;
 require "helper.php";
+require "Renderable.php";
 
-class View
+use Core\Renderable;
+
+class View implements Renderable
 {
     private function __construct(private readonly string $file, private array $data = [])
     {
@@ -15,7 +18,7 @@ class View
      * @param bool $systemView - false by default
      * @return View
      */
-    public static function make(string $name, array $data = [], bool $systemView = false): View
+    public static function prepare(string $name, array $data = [], bool $systemView = false): View
     {
         $viewDirectory = !$systemView ? App::$VIEW_DIRECTORY : App::$SYSTEM_VIEW_DIRECTORY;
 
@@ -49,5 +52,11 @@ class View
             }
             include $this->file;
         })();
+    }
+
+    public function render(): void
+    {
+        extract($this->data);
+        include $this->file;
     }
 }
