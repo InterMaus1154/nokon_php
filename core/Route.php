@@ -1,31 +1,26 @@
 <?php
 
-namespace Core;
+namespace core;
+
+use Closure;
 
 class Route
 {
-    public static function get(string $uri, callable $action): void
+
+    public string $methodName;
+
+    public function __construct(public RequestMethod $method, public string $uri, public mixed $action)
     {
-        app('router')->addRoute('GET', $uri, $action);
+        $this->methodName = $this->method->value;
     }
 
-    public static function post(string $uri, callable $action): void
-    {
-        app('router')->addRoute('POST', $uri, $action);
-    }
 
-    public static function put(string $uri, callable $action): void
+    /**
+     * [WIP] Method
+     * @return string
+     */
+    public function getRouteString(): string
     {
-        app('router')->addRoute('PUT', $uri, $action);
-    }
-
-    public static function patch(string $uri, callable $action): void
-    {
-        app('router')->addRoute('PATCH', $uri, $action);
-    }
-
-    public static function delete(string $uri, callable $action): void
-    {
-        app('router')->addRoute('DELETE', $uri, $action);
+        return strtoupper($this->method->value) . '::' . $this->uri;
     }
 }

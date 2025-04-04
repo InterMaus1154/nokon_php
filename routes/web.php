@@ -1,15 +1,14 @@
 <?php
 
-use Core\Route;
-use Core\Redirect;
-use Core\View;
-use Core\Response;
+use core\RequestMethod;
 
-Route::get('/', function () {
-    return View::prepare('dashboard');
-});
+return new class extends \Core\RouteStorage {
+    public function registerRoutes(): self
+    {
+        $this->route(RequestMethod::GET, '/', function(){
 
+        });
 
-Route::post('/test', function(){
-    echo "test";
-});
+        return $this;
+    }
+};
