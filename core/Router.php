@@ -53,12 +53,9 @@ class Router extends Singleton
             [$class, $method] = $action;
             $instance = new $class();
             $result = $instance->$method();
-            if ($result instanceof Renderable) {
-                $result->render();
-            }
-            exit;
+        }else{
+            $result = $action();
         }
-        $result = $action();
         if ($result instanceof Renderable) {
             $result->render();
         }
