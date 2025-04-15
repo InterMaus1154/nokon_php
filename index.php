@@ -25,7 +25,7 @@ use Core\RouteStorage;
 //$app = App::getInstance();
 //
 //$app->registerService('router', Router::getInstance());
-//$app->registerService('routes', require_once("routes/web.php"));
+//$app->registerService('user', require_once("user/routes.php"));
 //$app->registerService('redirect', Redirect::getInstance());
 //$app->registerService('session', Session::getInstance());
 //$app->registerService('response', Response::getInstance());
@@ -33,6 +33,6 @@ use Core\RouteStorage;
 
 //$app->run();
 
-$routes = (require 'routes/web.php')->registerRoutes();
-//print_r(count($routes->getRoutes()));
-echo $routes->getRoutes()[0]->getRouteString();
+$routes = (require 'user/routes.php')->registerRoutes();
+//print_r(count($user->getRoutes()));
+//echo $user->getRoutes()[0]->getRouteString();

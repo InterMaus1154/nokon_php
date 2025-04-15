@@ -33,7 +33,7 @@ class Router extends Singleton
         $requestUri = parse_url($_SERVER['REQUEST_URI'])['path'];
         $requestMethod = $_SERVER['REQUEST_METHOD'];
 
-        // print_r($this->routes[$requestMethod][$requestUri]());
+        // print_r($this->user[$requestMethod][$requestUri]());
 
         if (!$this->isRouteExist($requestMethod, $requestUri)) {
             http_response_code(404);

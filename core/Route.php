@@ -19,7 +19,7 @@ class Route
      * [WIP] Method
      * @return string
      */
-    public function getRouteString(): string
+    public function getRouteSignature(): string
     {
         return strtoupper($this->method->value) . '::' . $this->uri;
     }
