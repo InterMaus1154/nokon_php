@@ -9,7 +9,7 @@ class Route
 
     public string $methodName;
 
-    public function __construct(public RequestMethod $method, public string $uri, public mixed $action)
+    public function __construct(public RequestMethod $method, public string $uri, public array|Renderable|Closure $action)
     {
         $this->methodName = $this->method->value;
     }
@@ -17,10 +17,13 @@ class Route
 
     /**
      * [WIP] Method
+     * Get unique signature of a route
+     * Structure:
+     * <REQUEST_METHOD>::<URI>
      * @return string
      */
     public function getRouteSignature(): string
     {
-        return strtoupper($this->method->value) . '::' . $this->uri;
+        return strtoupper($this->methodName) . '::' . $this->uri;
     }
 }

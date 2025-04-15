@@ -2,6 +2,7 @@
 
 namespace Core;
 
+use Closure;
 use Core\ReturnTypes;
 
 class Router extends Singleton
@@ -26,10 +27,19 @@ class Router extends Singleton
     }
 
     /**
+     * @param RouteStorage $routeStorage
      * @return void
      */
-    public function dispatch(): void
+    public function dispatch(RouteStorage $routeStorage): void
     {
+//        print_r($routeStorage->getRoutes()['GET::/']->action);
+        $route = $routeStorage->getRoutes()['GET::/'];
+        $action = $route->action;
+        $result = $action();
+        if($result instanceof Renderable){
+            $result->render();
+        }
+        exit;
         $requestUri = parse_url($_SERVER['REQUEST_URI'])['path'];
         $requestMethod = $_SERVER['REQUEST_METHOD'];
 

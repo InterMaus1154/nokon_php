@@ -89,21 +89,21 @@ class App extends Singleton
      * @return void
      * Run the application
      */
-    public function run(): void
+    public function run(RouteStorage $routeStorage): void
     {
         if(!$this->isServiceRegistered('router')){
             http_response_code(500);
             die("Router not found");
         }
 
-        if(!$this->isServiceRegistered('nokonExceptionHandler')){
-            http_response_code(500);
-            die("Default exception handler is not found");
-        }
+//        if(!$this->isServiceRegistered('nokonExceptionHandler')){
+//            http_response_code(500);
+//            die("Default exception handler is not found");
+//        }
 
         // TODO: create proper exception handling
 //        set_exception_handler([$this->getService('nokonExceptionHandler'), 'handleException']);
 
-        $this->getService('router')->dispatch();
+        $this->getService('router')->dispatch($routeStorage);
     }
 }

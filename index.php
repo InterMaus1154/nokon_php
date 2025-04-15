@@ -22,17 +22,16 @@ use Core\Response;
 use Core\ExceptionHandler;
 use Core\RouteStorage;
 
-//$app = App::getInstance();
+$app = App::getInstance();
 //
-//$app->registerService('router', Router::getInstance());
-//$app->registerService('user', require_once("user/routes.php"));
+$app->registerService('router', Router::getInstance());
 //$app->registerService('redirect', Redirect::getInstance());
 //$app->registerService('session', Session::getInstance());
 //$app->registerService('response', Response::getInstance());
 //$app->registerService('nokonExceptionHandler', (new \Core\ExceptionHandler()));
 
-//$app->run();
 
-$routes = (require 'user/routes.php')->registerRoutes();
+$routeStorage = (require 'user/routes.php')->registerRoutes();
+$app->run($routeStorage);
 //print_r(count($user->getRoutes()));
 //echo $user->getRoutes()[0]->getRouteString();
