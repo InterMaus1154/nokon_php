@@ -10,4 +10,9 @@ class ViewController
     {
         return view('index-2');
     }
+
+    public function submit()
+    {
+        var_dump($_POST);
+    }
 }

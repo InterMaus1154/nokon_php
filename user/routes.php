@@ -8,6 +8,7 @@ return new class extends \Core\RouteStorage {
         });
 
         $this->get('/test', [\user\ViewController::class, 'show']);
+        $this->post('/submit', [\user\ViewController::class, 'submit']);
 
         return $this;
     }

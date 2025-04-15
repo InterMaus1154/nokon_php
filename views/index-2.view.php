@@ -7,5 +7,9 @@
 </head>
 <body>
     <h1>Hello from controller</h1>
+    <form action="/submit" method="POST">
+        <input name="name" type="text"/>
+        <button>Submit</button>
+    </form>
 </body>
 </html>
