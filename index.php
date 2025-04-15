@@ -13,6 +13,7 @@ require "core/helper_return.php";
 require "core/ExceptionHandler.php";
 require 'core/RouteStorage.php';
 require 'core/RequestMethod.php';
+require 'user/ViewController.php';
 
 use Core\App;
 use Core\Router;

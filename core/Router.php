@@ -32,34 +32,36 @@ class Router extends Singleton
      */
     public function dispatch(RouteStorage $routeStorage): void
     {
-//        print_r($routeStorage->getRoutes()['GET::/']->action);
-        $route = $routeStorage->getRoutes()['GET::/'];
-        $action = $route->action;
-        $result = $action();
-        if($result instanceof Renderable){
-//            $result->render();
-        }
-
+        // parse uri and method from the request
         $requestUri = parse_url($_SERVER['REQUEST_URI'])['path'];
         $requestMethod = $_SERVER['REQUEST_METHOD'];
 
+        // create route signature
         $requestedRouteSignature = Route::createRouteSignature($requestMethod, $requestUri);
+
+        // if requested page is not found (route not registered), set 404
+        // proper exception TODO
         if(!$routeStorage->isRouteRegistered($requestedRouteSignature)){
             http_response_code(404);
             echo "404: Page not found";
             exit;
         }
-        exit;
-        // print_r($this->user[$requestMethod][$requestUri]());
 
-        if (!$this->isRouteExist($requestMethod, $requestUri)) {
-            http_response_code(404);
-            echo "404: Route not found!";
+        $route = $routeStorage->getRoutes()[$requestedRouteSignature];
+        $action = $route->action;
+        if(is_array($action)){
+            [$class, $method]= $action;
+            $instance = new $class();
+            $result = $instance->$method();
+            if($result instanceof Renderable){
+                $result->render();
+            }
             exit;
         }
-
-        $action = $this->routes[$requestMethod][$requestUri]();
-        $action->render();
+        $result = $action();
+        if($result instanceof Renderable){
+                $result->render();
+        }
 
     }
 }
