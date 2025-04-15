@@ -37,12 +37,19 @@ class Router extends Singleton
         $action = $route->action;
         $result = $action();
         if($result instanceof Renderable){
-            $result->render();
+//            $result->render();
         }
-        exit;
+
         $requestUri = parse_url($_SERVER['REQUEST_URI'])['path'];
         $requestMethod = $_SERVER['REQUEST_METHOD'];
 
+        $requestedRouteSignature = Route::createRouteSignature($requestMethod, $requestUri);
+        if(!$routeStorage->isRouteRegistered($requestedRouteSignature)){
+            http_response_code(404);
+            echo "404: Page not found";
+            exit;
+        }
+        exit;
         // print_r($this->user[$requestMethod][$requestUri]());
 
         if (!$this->isRouteExist($requestMethod, $requestUri)) {

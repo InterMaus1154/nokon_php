@@ -84,6 +84,20 @@ class RouteStorage
         $this->route(RequestMethod::PATCH, $uri, $action);
     }
 
+    /**
+     * Returns TRUE or FALSE if a route is registered based on route signature
+     * @param string $routeSignature
+     * @return bool
+     */
+    public function isRouteRegistered(string $routeSignature): bool
+    {
+        return isset($this->routes[$routeSignature]);
+    }
+
+    /**
+     * Return the array of registered routes
+     * @return Route[]
+     */
     public function getRoutes():array{
         return $this->routes;
     }

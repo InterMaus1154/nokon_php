@@ -7,6 +7,10 @@ return new class extends \Core\RouteStorage {
             return view('index');
         });
 
+        $this->get('/test', function(){
+
+        });
+
         return $this;
     }
 };

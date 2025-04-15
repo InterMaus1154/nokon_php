@@ -24,6 +24,11 @@ class Route
      */
     public function getRouteSignature(): string
     {
-        return strtoupper($this->methodName) . '::' . $this->uri;
+        return self::createRouteSignature($this->methodName, $this->uri);
+    }
+
+    public static function createRouteSignature(string $requestMethod, string $uri): string
+    {
+        return strtoupper($requestMethod) . '::' . $uri;
     }
 }
