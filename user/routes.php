@@ -1,14 +1,17 @@
 <?php
 
-return new class extends \Core\RouteStorage {
+use core\RouteStorage;
+use user\app\controllers\ViewController;
+
+return new class extends RouteStorage {
     public function registerRoutes(): self
     {
         $this->get('/', function(){
-            return \Core\View::prepare('index');
+            return view('index');
         });
 
-        $this->get('/test', [\user\ViewController::class, 'show']);
-        $this->post('/submit', [\user\ViewController::class, 'submit']);
+        $this->get('/test', [ViewController::class, 'index']);
+        $this->get('/about', [ViewController::class, 'about']);
 
         return $this;
     }

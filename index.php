@@ -13,7 +13,6 @@ require "core/helper_return.php";
 require "core/ExceptionHandler.php";
 require 'core/RouteStorage.php';
 require 'core/RequestMethod.php';
-require 'user/ViewController.php';
 
 use Core\App;
 use Core\Router;
@@ -22,6 +21,15 @@ use Core\Session;
 use Core\Response;
 use Core\ExceptionHandler;
 use Core\RouteStorage;
+
+// TEMP
+// load all files from user folder
+$iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(__DIR__.'/user'));
+$files = new RegexIterator($iterator, '/\.php$/');
+
+foreach ($files as $file){
+    require_once $file->getPathname();
+}
 
 $app = App::getInstance();
 //

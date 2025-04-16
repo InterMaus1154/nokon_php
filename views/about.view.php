@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Document</title>
+    <title>About</title>
 </head>
 <body>
-    <h1>Hello from controller</h1>
-    <a href="/about">About</a>
+<h1>About</h1>
+<a href="/test">Home</a>
 </body>
 </html>
