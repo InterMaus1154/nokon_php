@@ -3,6 +3,7 @@
 
 namespace core;
 use core\interfaces\Runnable;
+use Exception;
 
 require_once 'interfaces/Runnable.php';
 abstract class ServiceSingleton implements Runnable
@@ -78,6 +79,23 @@ abstract class ServiceSingleton implements Runnable
         }
 
         unset($this->services[$serviceKey]);
+    }
+
+    /**
+     * Register a service to the app
+     * @param string $serviceKey
+     * @param mixed $service
+     * @return void
+     * @throws Exception
+     */
+    public function registerService(string $serviceKey, mixed $service): void
+    {
+        // check for duplicate
+        if(isset($this->services[$serviceKey])){
+            throw new Exception('Service already registered!');
+        }
+
+        $this->services[$serviceKey] = $service;
     }
 
     public function __get(string $serviceKey)

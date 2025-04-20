@@ -27,22 +27,6 @@ class App extends ServiceSingleton implements Runnable
     }
 
     /**
-     * Register a service to the app
-     * @param string $serviceKey
-     * @param mixed $service
-     * @return void
-     */
-    public function registerService(string $serviceKey, mixed $service): void
-    {
-        // check for duplicate
-        if(isset($this->services[$serviceKey])){
-            die("Service already registered");
-        }
-
-        $this->services[$serviceKey] = $service;
-    }
-
-    /**
      * @return void
      * Run the application
      * @throws Exception
