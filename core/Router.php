@@ -1,36 +1,19 @@
 <?php
 
-namespace Core;
-
-use Closure;
-use Core\ReturnTypes;
+namespace core;
 
 class Router extends Singleton
 {
-
-    private array $routes = array();
-
     protected function __construct()
     {
         parent::__construct();
-        $this->routes = [];
-    }
-
-    private function isRouteExist(string $method, string $uri): bool
-    {
-        return array_key_exists($method, $this->routes) && array_key_exists($uri, $this->routes[$method]);
-    }
-
-    public function addRoute(string $method, string $uri, callable $action): void
-    {
-        $this->routes[$method][$uri] = $action;
     }
 
     /**
-     * @param RouteStorage $routeStorage
+     *
      * @return void
      */
-    public function dispatch(RouteStorage $routeStorage): void
+    public function dispatch(): void
     {
         // parse uri and method from the request
         $requestUri = parse_url($_SERVER['REQUEST_URI'])['path'];
@@ -41,13 +24,13 @@ class Router extends Singleton
 
         // if requested page is not found (route not registered), set 404
         // proper exception TODO
-        if (!$routeStorage->isRouteRegistered($requestedRouteSignature)) {
+        if (!$this->routeStorage->isRouteRegistered($requestedRouteSignature)) {
             http_response_code(404);
             echo "404: Page not found";
             exit;
         }
 
-        $route = $routeStorage->getRoutes()[$requestedRouteSignature];
+        $route = $this->routeStorage->getRoutes()[$requestedRouteSignature];
         $action = $route->action;
         if (is_array($action)) {
             [$class, $method] = $action;

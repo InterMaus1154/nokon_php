@@ -12,7 +12,6 @@ class App extends Singleton
     public static string $VIEW_DIRECTORY = __DIR__ . '/../views/';
 
     public static string $SYSTEM_VIEW_DIRECTORY = __DIR__ . '/../core/views/';
-    private array $services = [];
 
     /**
      * Change the directory used to resolve views
@@ -42,50 +41,6 @@ class App extends Singleton
     }
 
     /**
-     * Get a service instance
-     * @param string | null $serviceKey
-     * @return mixed
-     */
-    public function getService(string | null $serviceKey = null): mixed
-    {
-        // check if service key provided
-        if(!isset($serviceKey)){
-            return App::getInstance();
-        }
-
-        // check if service exists
-        if(!$this->isServiceRegistered($serviceKey)){
-            die("No registered service with this key!");
-        }
-
-        return $this->services[$serviceKey];
-    }
-
-    /** Remove an already registered service instance
-     * @param string $serviceKey
-     * @return void
-     */
-    public function removeService(string $serviceKey): void
-    {
-        // check if service exists
-        if(!$this->isServiceRegistered($serviceKey)){
-            die("No registered service with this key!");
-        }
-
-        unset($this->services[$serviceKey]);
-    }
-
-    /**
-     * Check if a service is registered
-     * @param string $serviceKey
-     * @return bool
-     */
-    public function isServiceRegistered(string $serviceKey):bool
-    {
-        return isset($this->services[$serviceKey]);
-    }
-
-    /**
      * @return void
      * Run the application
      */
@@ -104,6 +59,8 @@ class App extends Singleton
         // TODO: create proper exception handling
 //        set_exception_handler([$this->getService('nokonExceptionHandler'), 'handleException']);
 
-        $this->getService('router')->dispatch($routeStorage);
+        $this->router
+            ->with('routeStorage', $routeStorage)
+            ->dispatch();
     }
 }

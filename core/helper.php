@@ -61,8 +61,8 @@ if (!function_exists('session')) {
 }
 
 if (!function_exists('response')) {
-    function response(): \Core\Response
+    function response(): \core\__temp\Response
     {
-        return \Core\Response::getInstance();
+        return \core\__temp\Response::getInstance();
     }
 }

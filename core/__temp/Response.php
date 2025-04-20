@@ -1,6 +1,9 @@
 <?php
 
-namespace Core;
+namespace core\__temp;
+
+use Core\Singleton;
+use Core\View;
 
 class Response extends Singleton
 {

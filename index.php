@@ -8,19 +8,11 @@ require "core/Router.php";
 require "core/Route.php";
 require "core/Redirect.php";
 require "core/Session.php";
-require "core/Response.php";
-require "core/helper_return.php";
-require "core/ExceptionHandler.php";
 require 'core/RouteStorage.php';
 require 'core/RequestMethod.php';
 
 use Core\App;
 use Core\Router;
-use Core\Redirect;
-use Core\Session;
-use Core\Response;
-use Core\ExceptionHandler;
-use Core\RouteStorage;
 
 // TEMP
 // load all files from user folder
