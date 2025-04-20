@@ -1,7 +1,8 @@
 <?php
 
-namespace core;
+namespace core\routing;
 
+use core\helpers\ServiceSingleton;
 use core\interfaces\Renderable;
 
 class Router extends ServiceSingleton

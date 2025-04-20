@@ -1,6 +1,6 @@
 <?php
 
-namespace core;
+namespace core\routing;
 
 use Closure;
 use core\enums\RequestMethod;

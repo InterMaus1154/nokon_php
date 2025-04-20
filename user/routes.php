@@ -1,6 +1,6 @@
 <?php
 
-use core\RouteStorage;
+use core\routing\RouteStorage;
 use user\app\controllers\ViewController;
 
 return new class extends RouteStorage {

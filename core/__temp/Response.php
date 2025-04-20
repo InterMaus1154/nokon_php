@@ -2,7 +2,7 @@
 
 namespace core\__temp;
 
-use Core\ServiceSingleton;
+use core\helpers\ServiceSingleton;
 use Core\View;
 
 class Response extends ServiceSingleton

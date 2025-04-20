@@ -1,11 +1,10 @@
 <?php
 
 
-namespace core;
+namespace core\helpers;
 use core\interfaces\Runnable;
 use Exception;
 
-require_once 'interfaces/Runnable.php';
 abstract class ServiceSingleton implements Runnable
 {
     protected function __construct()
@@ -42,6 +41,7 @@ abstract class ServiceSingleton implements Runnable
      * Get a service instance
      * @param string | null $serviceKey
      * @return mixed
+     * @throws Exception
      */
     public function getService(string | null $serviceKey = null): mixed
     {
@@ -52,7 +52,7 @@ abstract class ServiceSingleton implements Runnable
 
         // check if service exists
         if(!$this->isServiceRegistered($serviceKey)){
-            die("No registered service with this key!");
+            throw new Exception("No registered service with this key!");
         }
 
         return $this->services[$serviceKey];
@@ -71,14 +71,14 @@ abstract class ServiceSingleton implements Runnable
     /** Remove an already registered service instance
      * @param string $serviceKey
      * @return void
+     * @throws Exception
      */
     public function removeService(string $serviceKey): void
     {
         // check if service exists
         if(!$this->isServiceRegistered($serviceKey)){
-            die("No registered service with this key!");
+            throw new Exception("No registered service with this key!");
         }
-
         unset($this->services[$serviceKey]);
     }
 
@@ -99,9 +99,14 @@ abstract class ServiceSingleton implements Runnable
         $this->services[$serviceKey] = $service;
     }
 
+    /**
+     * @throws Exception
+     */
     public function __get(string $serviceKey)
     {
-        if(!$this->isServiceRegistered($serviceKey)) die("Service not registered $serviceKey");
+        if(!$this->isServiceRegistered($serviceKey)){
+            throw new Exception("Service not registered $serviceKey");
+        }
         return $this->getService($serviceKey);
     }
 }

@@ -2,8 +2,6 @@
 
 namespace core;
 
-require_once "interfaces/Renderable.php";
-
 use core\interfaces\Renderable;
 
 class View implements Renderable
