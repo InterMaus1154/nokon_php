@@ -1,0 +1,18 @@
+<?php
+
+$command = $argv[1] ?? null;
+
+switch ($command) {
+    case 'serve':
+        $host = '127.0.0.1';
+        $port = '8000';
+        echo "Nokon development server running on http://$host:$port\n";
+        passthru("php -S $host:$port index.php");
+        break;
+
+    default:
+        echo "Nokon CLI\n";
+        echo "Usage:\n";
+        echo "  php nokon serve  Start local dev server\n";
+        break;
+}
