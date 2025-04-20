@@ -2,7 +2,9 @@
 
 namespace core;
 
-class Router extends Singleton
+use core\interfaces\Renderable;
+
+class Router extends ServiceSingleton
 {
     protected function __construct()
     {
@@ -13,7 +15,7 @@ class Router extends Singleton
      *
      * @return void
      */
-    public function dispatch(): void
+    public function run(): void
     {
         // parse uri and method from the request
         $requestUri = parse_url($_SERVER['REQUEST_URI'])['path'];

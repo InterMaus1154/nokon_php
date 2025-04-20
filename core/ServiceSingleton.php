@@ -1,18 +1,20 @@
 <?php
 
-namespace Core;
 
-abstract class Singleton
+namespace core;
+use core\interfaces\Runnable;
+
+require_once 'interfaces/Runnable.php';
+abstract class ServiceSingleton implements Runnable
 {
-    protected array $services = array();
     protected function __construct()
-    {
-    }
+    {}
 
     private function __clone(): void
     {}
 
     private static mixed $instances = [];
+    protected array $services = array();
 
     public static function getInstance(): static
     {
@@ -20,10 +22,15 @@ abstract class Singleton
         if(!isset(self::$instances[$class])){
             self::$instances[$class] = new static();
         }
-
         return self::$instances[$class];
     }
 
+    /**
+     *
+     * @param string $serviceKey
+     * @param mixed $service
+     * @return $this
+     */
     public function with(string $serviceKey, mixed $service):static{
         $this->services[$serviceKey] = $service;
         return self::getInstance();

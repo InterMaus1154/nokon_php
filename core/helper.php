@@ -38,7 +38,7 @@ if (!function_exists('app')) {
 }
 
 if (!function_exists('redirect')) {
-    function redirect(string|null $url = null, int $status = 302, bool $replace = true): \Core\Redirect
+    function redirect(string|null $url = null, int $status = 302, bool $replace = true): \core\__temp\Redirect
     {
         if (!isset($url)) {
             return app('redirect');

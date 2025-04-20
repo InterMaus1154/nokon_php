@@ -3,6 +3,8 @@
 namespace core;
 
 use Closure;
+use core\enums\RequestMethod;
+use core\interfaces\Renderable;
 
 class RouteStorage
 {

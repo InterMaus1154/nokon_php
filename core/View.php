@@ -1,10 +1,10 @@
 <?php
 
-namespace Core;
-require "helper.php";
-require "Renderable.php";
+namespace core;
 
-use Core\Renderable;
+require_once "interfaces/Renderable.php";
+
+use core\interfaces\Renderable;
 
 class View implements Renderable
 {
@@ -29,7 +29,7 @@ class View implements Renderable
             dd("Views directory doesn't exist at the following location:", $viewDirectory);
         }
 
-        $file = $viewDirectory . $name . '.view.php';
+        $file = $viewDirectory . $name . '.View.php';
         /**
          * Check if requested view file exists at base directory
          */

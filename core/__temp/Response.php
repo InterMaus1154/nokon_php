@@ -2,10 +2,10 @@
 
 namespace core\__temp;
 
-use Core\Singleton;
+use Core\ServiceSingleton;
 use Core\View;
 
-class Response extends Singleton
+class Response extends ServiceSingleton
 {
     protected function __construct()
     {

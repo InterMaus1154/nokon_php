@@ -1,8 +1,10 @@
 <?php
 
-namespace Core;
+namespace core\__temp;
 
-class Redirect extends Singleton
+use Core\ServiceSingleton;
+
+class Redirect extends ServiceSingleton
 {
     protected function __construct()
     {

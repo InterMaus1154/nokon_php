@@ -1,10 +1,12 @@
 <?php
 
-namespace Core;
-require "Singleton.php";
-use Core\Singleton;
+namespace core;
+use core\interfaces\Runnable;
+use Exception;
 
-class App extends Singleton
+require_once "ServiceSingleton.php";
+
+class App extends ServiceSingleton implements Runnable
 {
     /**
      * View directory
@@ -43,24 +45,17 @@ class App extends Singleton
     /**
      * @return void
      * Run the application
+     * @throws Exception
      */
-    public function run(RouteStorage $routeStorage): void
+    public function run(): void
     {
         if(!$this->isServiceRegistered('router')){
             http_response_code(500);
-            die("Router not found");
+            throw new Exception('Router not found');
         }
 
-//        if(!$this->isServiceRegistered('nokonExceptionHandler')){
-//            http_response_code(500);
-//            die("Default exception handler is not found");
-//        }
-
-        // TODO: create proper exception handling
-//        set_exception_handler([$this->getService('nokonExceptionHandler'), 'handleException']);
-
         $this->router
-            ->with('routeStorage', $routeStorage)
-            ->dispatch();
+            ->with('routeStorage', $this->routeStorage)
+            ->run();
     }
 }
