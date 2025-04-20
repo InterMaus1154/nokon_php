@@ -31,9 +31,10 @@ abstract class ServiceSingleton implements Runnable
      * @param string $serviceKey
      * @param mixed $service
      * @return $this
+     * @throws Exception
      */
     public function with(string $serviceKey, mixed $service):static{
-        $this->services[$serviceKey] = $service;
+        $this->registerService($serviceKey, $service);
         return self::getInstance();
     }
 
