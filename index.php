@@ -27,9 +27,7 @@ foreach ($files as $file){
     require_once $file->getPathname();
 }
 
-$app = App::getInstance();
-
-$app->registerService('router', Router::getInstance());
-
-$routeStorage = (require 'user/routes.php')->registerRoutes();
-$app->with('routeStorage', $routeStorage)->run();
+App::getInstance()
+    ->with('routeStorage', (require 'user/routes.php')->registerRoutes())
+    ->with('router', Router::getInstance())
+    ->run();
