@@ -39,17 +39,12 @@ abstract class ServiceSingleton implements Runnable
 
     /**
      * Get a service instance
-     * @param string | null $serviceKey
+     * @param string $serviceKey
      * @return mixed
      * @throws Exception
      */
-    public function getService(string | null $serviceKey = null): mixed
+    public function getService(string $serviceKey): mixed
     {
-        // check if service key provided
-        if(!isset($serviceKey)){
-            return self::getInstance();
-        }
-
         // check if service exists
         if(!$this->isServiceRegistered($serviceKey)){
             throw new Exception("No registered service with this key!");
