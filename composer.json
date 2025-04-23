@@ -1,6 +1,6 @@
 {
     "name": "nokon/nokon",
-    "description": "Nokon is a lightweight PHP framework, only giving what you need at a time.",
+    "description": "Nokon is a lightweight PHP framework",
     "type": "project",
     "license": "MIT",
     "version": "1.0.0-alpha",
