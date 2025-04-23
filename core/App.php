@@ -14,7 +14,7 @@ class App extends ServiceSingleton implements Runnable
 
     public static string $SYSTEM_VIEW_DIRECTORY = __DIR__ . '/../core/views/';
 
-    protected static array $appConfiguration = [];
+    protected static array $appConfigurations = [];
 
     /**
      * Change the directory used to resolve views
@@ -24,7 +24,7 @@ class App extends ServiceSingleton implements Runnable
      */
     public function setViewDirectory(string $viewDirectory): void
     {
-        self::$VIEW_DIRECTORY = $viewDirectory;
+        self::$appConfigurations['view_directory'] = $viewDirectory;
     }
 
     /**
@@ -34,7 +34,7 @@ class App extends ServiceSingleton implements Runnable
      */
     public function run(): void
     {
-        self::$appConfiguration = self::getAppConfigurations();
+        self::$appConfigurations = self::getAppConfigurations();
         if(!$this->isServiceRegistered('router')){
             http_response_code(500);
             throw new Exception('Router not found');
@@ -53,19 +53,29 @@ class App extends ServiceSingleton implements Runnable
     {
         $values = require_once 'app_config.php';
         if(is_bool($values)){
-            $values = self::$appConfiguration;
+            $values = self::$appConfigurations;
         }
         return $values;
     }
 
     /**
-     * Set an App configuration value
+     * Set an App configuration value.
+     * app_config.php will NOT change, only internal configuration array
      * @param string $key
      * @param mixed $value
      * @return void
      */
     public static function setAppConfigurationValue(string $key, mixed $value): void
     {
-        self::$appConfiguration[$key] = $value;
+        self::$appConfigurations[$key] = $value;
+    }
+
+    /**
+     * Reset configuration values to app_config.php
+     * @return void
+     */
+    public static function resetAppConfigurations():void
+    {
+        self::$appConfigurations = require 'app_config.php';
     }
 }
