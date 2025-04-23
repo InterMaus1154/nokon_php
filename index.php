@@ -33,8 +33,11 @@ try{
         ->with('router', Router::getInstance())
         ->run();
 }catch(Exception $e){
-    http_response_code(500);
-    echo "An internal error occurred!";
+    if(http_response_code() == 200){
+        http_response_code(500);
+    }
+    echo "An internal error occurred! </br>";
+    echo "Status: " . http_response_code() . "</br>";
     echo $e->getMessage();
     exit;
 }

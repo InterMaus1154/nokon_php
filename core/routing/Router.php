@@ -4,6 +4,7 @@ namespace core\routing;
 
 use core\helpers\ServiceSingleton;
 use core\interfaces\Renderable;
+use Exception;
 
 class Router extends ServiceSingleton
 {
@@ -15,6 +16,7 @@ class Router extends ServiceSingleton
     /**
      *
      * @return void
+     * @throws Exception
      */
     public function run(): void
     {
@@ -29,8 +31,7 @@ class Router extends ServiceSingleton
         // proper exception TODO
         if (!$this->routeStorage->isRouteRegistered($requestedRouteSignature)) {
             http_response_code(404);
-            echo "404: Page not found";
-            exit;
+            throw new Exception('Page not found!');
         }
 
         $route = $this->routeStorage->getRoutes()[$requestedRouteSignature];

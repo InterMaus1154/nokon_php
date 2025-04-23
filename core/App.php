@@ -14,6 +14,8 @@ class App extends ServiceSingleton implements Runnable
 
     public static string $SYSTEM_VIEW_DIRECTORY = __DIR__ . '/../core/views/';
 
+    protected static array $appConfiguration = [];
+
     /**
      * Change the directory used to resolve views
      * Default: root/views
@@ -32,6 +34,7 @@ class App extends ServiceSingleton implements Runnable
      */
     public function run(): void
     {
+        self::$appConfiguration = self::getAppConfigurations();
         if(!$this->isServiceRegistered('router')){
             http_response_code(500);
             throw new Exception('Router not found');
@@ -40,5 +43,29 @@ class App extends ServiceSingleton implements Runnable
         $this->router
             ->with('routeStorage', $this->routeStorage)
             ->run();
+    }
+
+    /**
+     * Returns an array of App configurations defined in 'app_config.php'
+     * @return array
+     */
+    public static function getAppConfigurations(): array
+    {
+        $values = require_once 'app_config.php';
+        if(is_bool($values)){
+            $values = self::$appConfiguration;
+        }
+        return $values;
+    }
+
+    /**
+     * Set an App configuration value
+     * @param string $key
+     * @param mixed $value
+     * @return void
+     */
+    public static function setAppConfigurationValue(string $key, mixed $value): void
+    {
+        self::$appConfiguration[$key] = $value;
     }
 }

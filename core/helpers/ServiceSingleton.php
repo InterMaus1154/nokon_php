@@ -51,7 +51,7 @@ abstract class ServiceSingleton implements Runnable
     {
         // check if service exists
         if (!$this->isServiceRegistered($serviceKey)) {
-            throw new Exception("No registered service with this key!");
+            throw new Exception("No registered service with this key($serviceKey) in ". static::class);
         }
 
         return $this->services[$serviceKey];
@@ -103,9 +103,6 @@ abstract class ServiceSingleton implements Runnable
      */
     public function __get(string $serviceKey)
     {
-        if (!$this->isServiceRegistered($serviceKey)) {
-            throw new Exception("Service not registered $serviceKey");
-        }
         return $this->getService($serviceKey);
     }
 }
