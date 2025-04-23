@@ -1,8 +1,8 @@
 <?php
 
-namespace core;
-use core\helpers\ServiceSingleton;
-use core\interfaces\Runnable;
+namespace Core;
+use Core\Helpers\ServiceSingleton;
+use Core\Interfaces\Runnable;
 use Exception;
 
 class App extends ServiceSingleton implements Runnable

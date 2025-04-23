@@ -1,5 +1,5 @@
 <?php
-namespace core\interfaces;
+namespace Core\Interfaces;
 interface Runnable
 {
     public function run(): void;

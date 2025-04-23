@@ -1,10 +1,10 @@
 <?php
 
-namespace core\routing;
+namespace Core\Routing;
 
 use Closure;
-use core\enums\RequestMethod;
-use core\interfaces\Renderable;
+use Core\enums\RequestMethod;
+use Core\interfaces\Renderable;
 
 class RouteStorage
 {

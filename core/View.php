@@ -1,8 +1,9 @@
 <?php
 
-namespace core;
+namespace Core;
 
-use core\interfaces\Renderable;
+use Core\Interfaces\Renderable;
+use Exception;
 
 class View implements Renderable
 {
@@ -15,6 +16,7 @@ class View implements Renderable
      * @param array $data - optional data to pass to the view
      * @param bool $systemView - false by default
      * @return View
+     * @throws Exception
      */
     public static function prepare(string $name, array $data = [], bool $systemView = false): View
     {
@@ -24,7 +26,7 @@ class View implements Renderable
          * Check if defined views directory exists
          */
         if (!is_dir($viewDirectory)) {
-            dd("Views directory doesn't exist at the following location:", $viewDirectory);
+            throw new Exception("Views directory doesn't exist at the following location:", $viewDirectory);
         }
 
         $file = $viewDirectory . $name . '.View.php';
@@ -32,24 +34,10 @@ class View implements Renderable
          * Check if requested view file exists at base directory
          */
         if (!file_exists($file)) {
-            dd("Requested view doesn't exist", $name);
+            throw new Exception("Requested view doesn't exist", $name);
         }
 
         return new View($file, $data);
-    }
-
-    /**
-     * Show a view
-     * @return void
-     */
-    public function show(): void
-    {
-        (function () {
-            if (!empty($this->data)) {
-                extract($this->data);
-            }
-            include $this->file;
-        })();
     }
 
     public function render(): void

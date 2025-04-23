@@ -1,9 +1,7 @@
 <?php
+namespace Core\Helpers;
 
-
-namespace core\helpers;
-
-use core\interfaces\Runnable;
+use Core\Interfaces\Runnable;
 use Exception;
 
 abstract class ServiceSingleton implements Runnable

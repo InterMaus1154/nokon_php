@@ -1,6 +1,6 @@
 <?php
 
-namespace core\interfaces;
+namespace Core\Interfaces;
 
 interface Renderable
 {

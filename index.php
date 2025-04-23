@@ -2,20 +2,22 @@
 session_start();
 
 
-require_once 'core/interfaces/Renderable.php';
-require_once 'core/interfaces/Runnable.php';
-require_once 'core/helpers/ServiceSingleton.php';
-require_once "core/View.php";
-require_once "core/App.php";
-require_once "core/routing/Router.php";
-require_once "core/routing/Route.php";
-require_once 'core/routing/RouteStorage.php';
-require_once 'core/enums/RequestMethod.php';
+//require_once 'core/interfaces/Renderable.php';
+//require_once 'core/interfaces/Runnable.php';
+//require_once 'core/helpers/ServiceSingleton.php';
+//require_once "core/View.php";
+//require_once "core/App.php";
+//require_once "core/routing/Router.php";
+//require_once "core/routing/Route.php";
+//require_once 'core/routing/RouteStorage.php';
+//require_once 'core/enums/RequestMethod.php';
+//
+//require_once 'core/helpers/helper.php';
 
-require_once 'core/helpers/helper.php';
+require __DIR__. '/vendor/autoload.php';
 
 use Core\App;
-use core\routing\Router;
+use Core\routing\Router;
 
 // TEMP
 // load all files from user folder

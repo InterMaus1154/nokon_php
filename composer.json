@@ -1,0 +1,18 @@
+{
+    "name": "nokon/nokon",
+    "description": "Nokon is a lightweight PHP framework, only giving what you need at a time.",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Core\\": "core/",
+            "User\\": "user/"
+        }
+    },
+    "authors": [
+        {
+            "name": "intermaus1154",
+            "email": "amarco1154@gmail.com"
+        }
+    ],
+    "require": {}
+}

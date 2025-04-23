@@ -1,16 +1,14 @@
 <?php
 
-namespace core\routing;
+namespace Core\Routing;
 
 use Closure;
-use core\enums\RequestMethod;
-use core\interfaces\Renderable;
+use Core\enums\RequestMethod;
+use Core\interfaces\Renderable;
 
 class Route
 {
-
     public string $methodName;
-
     public function __construct(public RequestMethod $method, public string $uri, public array|Renderable|Closure $action)
     {
         $this->methodName = $this->method->value;
