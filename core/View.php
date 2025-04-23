@@ -23,18 +23,20 @@ class View implements Renderable
         $viewDirectory = !$systemView ? App::$VIEW_DIRECTORY : App::$SYSTEM_VIEW_DIRECTORY;
 
         /**
-         * Check if defined views directory exists
+         * Check if defined Views directory exists
          */
         if (!is_dir($viewDirectory)) {
-            throw new Exception("Views directory doesn't exist at the following location:", $viewDirectory);
+            http_response_code(404);
+            throw new Exception("Views directory doesn't exist at the following location:". $viewDirectory);
         }
 
-        $file = $viewDirectory . $name . '.View.php';
+        $file = $viewDirectory . $name . '.view.php';
         /**
          * Check if requested view file exists at base directory
          */
         if (!file_exists($file)) {
-            throw new Exception("Requested view doesn't exist", $name);
+            http_response_code(404);
+            throw new Exception("Requested view doesn't exist: ". $name . '.view.php');
         }
 
         return new View($file, $data);

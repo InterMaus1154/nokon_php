@@ -10,15 +10,15 @@ class App extends ServiceSingleton implements Runnable
     /**
      * View directory
      */
-    public static string $VIEW_DIRECTORY = __DIR__ . '/../views/';
+    public static string $VIEW_DIRECTORY = __DIR__ . '/../Views/';
 
     public static string $SYSTEM_VIEW_DIRECTORY = __DIR__ . '/../core/views/';
 
     protected static array $appConfigurations = [];
 
     /**
-     * Change the directory used to resolve views
-     * Default: root/views
+     * Change the directory used to resolve Views
+     * Default: root/Views
      * @param string $viewDirectory
      * @return void
      */

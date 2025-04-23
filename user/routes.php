@@ -9,7 +9,9 @@ return new class extends RouteStorage {
 
     public function registerRoutes(): self
     {
-
+        $this->get('/', function(){
+            return \Core\View::prepare('greeting');
+        });
         return $this;
     }
 };
