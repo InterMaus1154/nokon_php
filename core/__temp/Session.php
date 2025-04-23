@@ -1,8 +1,10 @@
 <?php
 
-namespace Core;
+namespace core\__temp;
 
-class Session extends Singleton
+use core\helpers\ServiceSingleton;
+
+class Session extends ServiceSingleton
 {
     private static function isSessionActive(): bool
     {

@@ -1,28 +1,44 @@
 <?php
 session_start();
 
-require "core/helper.php";
-require "core/View.php";
-require "core/App.php";
-require "core/Router.php";
-require "core/Route.php";
-require "core/Redirect.php";
-require "core/Session.php";
-require "core/Response.php";
+
+require_once 'core/interfaces/Renderable.php';
+require_once 'core/interfaces/Runnable.php';
+require_once 'core/helpers/ServiceSingleton.php';
+require_once "core/View.php";
+require_once "core/App.php";
+require_once "core/routing/Router.php";
+require_once "core/routing/Route.php";
+require_once 'core/routing/RouteStorage.php';
+require_once 'core/enums/RequestMethod.php';
+
+require_once 'core/helpers/helper.php';
 
 use Core\App;
-use Core\Router;
-use Core\Redirect;
-use Core\Session;
-use Core\Response;
+use core\routing\Router;
 
-$app = App::getInstance();
+// TEMP
+// load all files from user folder
+$iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(__DIR__.'/user'));
+$files = new RegexIterator($iterator, '/\.php$/');
 
-$app->registerService('router', Router::getInstance());
-$app->registerService('routes', require("routes/web.php"));
-$app->registerService('redirect', Redirect::getInstance());
-$app->registerService('session', Session::getInstance());
-$app->registerService('response', Response::getInstance());
+foreach ($files as $file){
+    require_once $file->getPathname();
+}
 
-$app->run();
+// exception handling will be improved later
+try{
+    App::getInstance()
+        ->with('routeStorage', (require 'user/routes.php')->registerRoutes())
+        ->with('router', Router::getInstance())
+        ->run();
+}catch(Exception $e){
+    if(http_response_code() == 200){
+        http_response_code(500);
+    }
+    echo "An internal error occurred! </br>";
+    echo "Status: " . http_response_code() . "</br>";
+    echo $e->getMessage();
+    exit;
+}
 

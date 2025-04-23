@@ -1,8 +1,11 @@
 <?php
 
-namespace Core;
+namespace core\__temp;
 
-class Response extends Singleton
+use core\helpers\ServiceSingleton;
+use Core\View;
+
+class Response extends ServiceSingleton
 {
     protected function __construct()
     {
@@ -11,15 +14,14 @@ class Response extends Singleton
 
     /**
      * @param string $view
-     * @param mixed $data
-     * @return Response
+     * @param mixed $data - optional data
+     * @return View
      */
-    public static function view(string $view, mixed $data = []): Response
+    public static function view(string $view, mixed $data = []): View
     {
-        View::make($view, $data)->show();
-
-        return self::getInstance();
+        return View::prepare($view, $data);
     }
+
 
     /**
      * @param mixed $data

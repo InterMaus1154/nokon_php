@@ -1,5 +1,6 @@
 <?php
 
+use Core\View;
 use JetBrains\PhpStorm\NoReturn;
 
 if (!function_exists('dd')) {
@@ -21,9 +22,9 @@ if (!function_exists('urlIs')) {
 }
 
 if (!function_exists('view')) {
-    function view($name, $data = []): \Core\Response
+    function view($name, $data = []): View
     {
-        return \Core\Response::view($name, $data);
+        return View::prepare($name, $data);
     }
 }
 
@@ -37,7 +38,7 @@ if (!function_exists('app')) {
 }
 
 if (!function_exists('redirect')) {
-    function redirect(string|null $url = null, int $status = 302, bool $replace = true): \Core\Redirect
+    function redirect(string|null $url = null, int $status = 302, bool $replace = true): \core\__temp\Redirect
     {
         if (!isset($url)) {
             return app('redirect');
@@ -60,8 +61,8 @@ if (!function_exists('session')) {
 }
 
 if (!function_exists('response')) {
-    function response(): \Core\Response
+    function response(): \core\__temp\Response
     {
-        return \Core\Response::getInstance();
+        return \core\__temp\Response::getInstance();
     }
 }
