@@ -10,9 +10,7 @@ return new class extends RouteStorage {
 
     public function registerRoutes(): self
     {
-        $this->get('/', function(){
-            return View::prepare('greeting');
-        });
+        $this->get('/', [\User\App\Controllers\TestController::class, 'greeting']);
         return $this;
     }
 };
