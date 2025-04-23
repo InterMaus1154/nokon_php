@@ -14,7 +14,6 @@ require_once 'core/enums/RequestMethod.php';
 
 require_once 'core/helpers/helper.php';
 
-
 use Core\App;
 use core\routing\Router;
 
@@ -27,7 +26,16 @@ foreach ($files as $file){
     require_once $file->getPathname();
 }
 
-App::getInstance()
-    ->with('routeStorage', (require 'user/routes.php')->registerRoutes())
-    ->with('router', Router::getInstance())
-    ->run();
+// exception handling will be improved later
+try{
+    App::getInstance()
+        ->with('routeStorage', (require 'user/routes.php')->registerRoutes())
+        ->with('router', Router::getInstance())
+        ->run();
+}catch(Exception $e){
+    http_response_code(500);
+    echo "An internal error occurred!";
+    echo $e->getMessage();
+    exit;
+}
+
