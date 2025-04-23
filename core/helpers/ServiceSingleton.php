@@ -80,7 +80,7 @@ abstract class ServiceSingleton implements Runnable
     }
 
     /**
-     * Register a service to the app
+     * Register a service to the App
      * @param string $serviceKey
      * @param mixed $service
      * @return void
