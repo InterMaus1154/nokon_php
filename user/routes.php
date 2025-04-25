@@ -13,6 +13,7 @@ return new class extends RouteStorage {
     {
         $this->get('/', [TestController::class, 'index']);
         $this->post('/submit', [TestController::class, 'submitForm']);
+        $this->get('/test', [TestController::class, 'testQuery']);
         return $this;
     }
 };

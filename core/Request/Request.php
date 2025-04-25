@@ -26,7 +26,7 @@ class Request
     }
 
     /**
-     * Returns
+     * Returns a value that is submitted via GET request
      * @param string $key
      * @param mixed|null $default
      * @return mixed

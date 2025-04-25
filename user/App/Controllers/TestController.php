@@ -21,4 +21,9 @@ class TestController
     {
         echo $this->request->input('username', 'alma');
     }
+
+    public function testQuery()
+    {
+        echo $this->request->query('testQuery');
+    }
 }
