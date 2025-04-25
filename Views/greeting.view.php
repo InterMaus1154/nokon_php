@@ -8,7 +8,9 @@
     <title>Nokon PHP Alpha v1</title>
 </head>
 <body>
-<h1>Nokon PHP Alpha v1</h1>
-<h2>To define your own routes, navigate to User/routes.php</h2>
+<form action="/submit" method="POST">
+    <input name="username" placeholder="username"/>
+    <input type="submit" value="Submit">
+</form>
 </body>
 </html>
