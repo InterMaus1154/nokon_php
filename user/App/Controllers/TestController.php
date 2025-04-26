@@ -19,7 +19,9 @@ class TestController extends NokonBaseController
 
     public function submitForm()
     {
-        echo $this->request->input('username', 'alma');
+        echo "<pre>";
+        print_r($this->request->all());
+        echo "</pre>";
     }
 
     public function testQuery()

@@ -36,4 +36,12 @@ class Request
         return $this->get[$key] ?? $default;
     }
 
+    /**
+     * Return an array of GET and POST values
+     * @return array
+     */
+    public function all(): array
+    {
+        return array_merge($this->get, $this->post);
+    }
 }

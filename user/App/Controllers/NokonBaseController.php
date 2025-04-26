@@ -11,4 +11,6 @@ abstract class NokonBaseController
     {
     $this->request = new Request();
     }
+
+
 }
