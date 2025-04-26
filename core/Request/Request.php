@@ -78,4 +78,13 @@ class Request
     {
         return in_array($key, $this->all());
     }
+
+    /**
+     * Determine whether request is empty
+     * @return bool
+     */
+    public function isEmpty():bool
+    {
+        return empty($this->all());
+    }
 }
