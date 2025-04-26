@@ -18,4 +18,14 @@ trait HasRequestHelpers{
     {
         return (new Request)->all();
     }
+
+    protected function only(string ...$keys):array
+    {
+        return (new Request)->only(...$keys);
+    }
+
+    protected function except(string ...$keys):array
+    {
+        return (new Request)->except(...$keys);
+    }
 }
