@@ -11,6 +11,7 @@
 <form action="/submit" method="POST">
     <input name="username" placeholder="username"/>
     <input type="password" name="password" placeholder="password">
+    <input type="email" name="email" id="" placeholder="email">
     <input type="submit" value="Submit">
 </form>
 </body>

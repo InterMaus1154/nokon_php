@@ -44,4 +44,16 @@ class Request
     {
         return array_merge($this->get, $this->post);
     }
+
+    /**
+     * Returns only an array of values specified by key
+     * @param string ...$keys
+     * @return array
+     */
+    public function only(string ...$keys): array
+    {
+        return array_filter($this->all(), function($key) use($keys){
+            return in_array($key, $keys);
+        }, ARRAY_FILTER_USE_KEY);
+    }
 }
