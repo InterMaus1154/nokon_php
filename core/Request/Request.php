@@ -76,7 +76,7 @@ class Request
      */
     public function has(string $key): bool
     {
-        return in_array($key, $this->all());
+        return isset($this->all()[$key]);
     }
 
     /**

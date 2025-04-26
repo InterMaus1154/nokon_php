@@ -22,7 +22,7 @@ class TestController extends NokonBaseController
     public function submitForm()
     {
         echo "<pre>";
-        print_r($this->only('password'));
+        print_r($this->request->has('password'));
         echo "</pre>";
     }
 
