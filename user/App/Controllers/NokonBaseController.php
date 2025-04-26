@@ -9,6 +9,6 @@ abstract class NokonBaseController
     protected Request $request;
     public function __construct()
     {
-        $this->request = new Request();
+    $this->request = new Request();
     }
 }
