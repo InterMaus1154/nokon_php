@@ -42,7 +42,7 @@ class Request
      */
     public function all(): array
     {
-        return array_merge($this->get, $this->post);
+        return array_merge($this->get, $this->post) ?? [];
     }
 
     /**
@@ -54,6 +54,18 @@ class Request
     {
         return array_filter($this->all(), function($key) use($keys){
             return in_array($key, $keys);
+        }, ARRAY_FILTER_USE_KEY);
+    }
+
+    /**
+     * Returns array of values except provided keys
+     * @param string ...$keys
+     * @return array
+     */
+    public function except(string ...$keys): array
+    {
+        return array_filter($this->all(), function($key)use($keys){
+            return !in_array($key, $keys);
         }, ARRAY_FILTER_USE_KEY);
     }
 }
