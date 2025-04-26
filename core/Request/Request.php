@@ -68,4 +68,14 @@ class Request
             return !in_array($key, $keys);
         }, ARRAY_FILTER_USE_KEY);
     }
+
+    /**
+     * Determine whether request has a specified key
+     * @param string $key
+     * @return bool
+     */
+    public function has(string $key): bool
+    {
+        return in_array($key, $this->all());
+    }
 }
