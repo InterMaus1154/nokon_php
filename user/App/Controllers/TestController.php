@@ -4,9 +4,11 @@ namespace User\App\Controllers;
 
 use Core\Request\Request;
 use Core\View;
+use User\App\Controllers\HasRequestHelpers;
 
 class TestController extends NokonBaseController
 {
+    use HasRequestHelpers;
     public function __construct()
     {
         parent::__construct();
@@ -20,7 +22,7 @@ class TestController extends NokonBaseController
     public function submitForm()
     {
         echo "<pre>";
-        print_r($this->request->all());
+        print_r($this->query('password', 'nopassword'));
         echo "</pre>";
     }
 
