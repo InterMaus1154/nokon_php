@@ -5,11 +5,11 @@ namespace User\App\Controllers;
 use Core\Request\Request;
 use Core\View;
 
-class TestController
+class TestController extends NokonBaseController
 {
     public function __construct()
     {
-        $this->request = new Request();
+        parent::__construct();
     }
 
     public function index()
