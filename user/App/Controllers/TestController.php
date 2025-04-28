@@ -12,7 +12,6 @@ class TestController extends NokonBaseController
     public function __construct()
     {
         parent::__construct();
-//        $this->__init();
     }
 
     public function index()

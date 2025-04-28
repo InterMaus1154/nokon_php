@@ -6,11 +6,6 @@ use Core\Request\Request;
 
 trait HasRequestHelpers
 {
-//    protected function __init(): void
-//    {
-//        $this->request = new Request();
-//    }
-
     protected function query(string $key, mixed $default = null): mixed
     {
         return $this->request->query($key, $default);
