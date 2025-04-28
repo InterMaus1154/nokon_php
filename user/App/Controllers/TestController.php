@@ -22,7 +22,7 @@ class TestController extends NokonBaseController
     public function submitForm()
     {
         echo "<pre>";
-        print_r(request('email'));
+        print_r($this->request->input('email', 'nomail'));
         echo "</pre>";
     }
 

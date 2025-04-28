@@ -22,7 +22,11 @@ class Request
      */
     public function input(string $key, mixed $default = null): mixed
     {
-        return array_merge($this->get, $this->post)[$key] ?? $default;
+        $value = array_merge($this->get, $this->post)[$key];
+        if(empty($value)){
+            return $default;
+        }
+        return $value;
     }
 
     /**
@@ -33,7 +37,11 @@ class Request
      */
     public function query(string $key, mixed $default = null): mixed
     {
-        return $this->get[$key] ?? $default;
+        $value = $this->get[$key];
+        if(empty($value)){
+            return $default;
+        }
+        return $value;
     }
 
     /**
