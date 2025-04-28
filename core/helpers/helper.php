@@ -3,7 +3,7 @@
 use Core\View;
 
 if (!function_exists('dd')) {
-    function dd(mixed $data, string|null $message = null): void
+    function dd(mixed $data, ?string $message): void
     {
         echo "<pre>";
         $data != null ? var_dump($data) : null;
@@ -20,7 +20,7 @@ if (!function_exists('urlIs')) {
 }
 
 if (!function_exists('view')) {
-    function view($name, $data = []): View
+    function view(string $name, array $data = []): View
     {
         return View::prepare($name, $data);
     }
@@ -28,11 +28,21 @@ if (!function_exists('view')) {
 
 if (!function_exists('app')) {
 
-    function app(string $serviceKey = null): mixed
+    function app(?string $serviceKey): mixed
     {
         if(!isset($serviceKey)){
             return \Core\App::getInstance();
         }
         return \Core\App::getInstance()->getService($serviceKey);
+    }
+}
+
+if(!function_exists('request')){
+
+    function request(?string $key, mixed $default = null){
+        if(!isset($key)){
+            return (new \Core\Request\Request());
+        }
+        return (new \Core\Request\Request())->input($key, $default);
     }
 }
