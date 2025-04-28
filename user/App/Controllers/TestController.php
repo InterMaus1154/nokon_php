@@ -12,6 +12,7 @@ class TestController extends NokonBaseController
     public function __construct()
     {
         parent::__construct();
+//        $this->__init();
     }
 
     public function index()
@@ -22,7 +23,7 @@ class TestController extends NokonBaseController
     public function submitForm()
     {
         echo "<pre>";
-        print_r($this->all());
+        print_r(request('email'));
         echo "</pre>";
     }
 

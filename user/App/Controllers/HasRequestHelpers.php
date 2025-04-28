@@ -6,39 +6,44 @@ use Core\Request\Request;
 
 trait HasRequestHelpers
 {
+//    protected function __init(): void
+//    {
+//        $this->request = new Request();
+//    }
+
     protected function query(string $key, mixed $default = null): mixed
     {
-        return (new Request)->query($key, $default);
+        return $this->request->query($key, $default);
     }
 
     protected function input(string $key, mixed $default = null): mixed
     {
-        return (new Request)->input($key, $default);
+        return $this->request->input($key, $default);
     }
 
     protected function all(): array
     {
-        return (new Request)->all();
+        return $this->request->all();
     }
 
     protected function only(string ...$keys): array
     {
-        return (new Request)->only(...$keys);
+        return $this->request->only(...$keys);
     }
 
     protected function except(string ...$keys): array
     {
-        return (new Request)->except(...$keys);
+        return $this->request->except(...$keys);
     }
 
     protected function has(string $key): bool
     {
-        return (new Request)->has($key);
+        return $this->request->has($key);
     }
 
     protected function isEmpty(): bool
     {
-        return (new Request)->isEmpty();
+        return $this->request->isEmpty();
     }
 
 }
