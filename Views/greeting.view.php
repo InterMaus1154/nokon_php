@@ -13,6 +13,8 @@
     <input type="password" name="password" placeholder="password">
     <input type="email" name="email" id="" placeholder="email">
     <input type="submit" value="Submit">
+    <?= $email ?? '' ?>
+    <?= $username ?? '' ?>
 </form>
 </body>
 </html>

@@ -21,9 +21,10 @@ class TestController extends NokonBaseController
 
     public function submitForm()
     {
-        echo "<pre>";
-        print_r($this->request->input('email', 'nomail'));
-        echo "</pre>";
+        return view('greeting', [
+            'username' => $this->username,
+            'email' => $this->email
+        ]);
     }
 
     public function testQuery()
