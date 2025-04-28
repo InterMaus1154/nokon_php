@@ -1,9 +1,11 @@
 <?php
 
 namespace User\App\Controllers;
+
 use Core\Request\Request;
 
-trait HasRequestHelpers{
+trait HasRequestHelpers
+{
     protected function query(string $key, mixed $default = null): mixed
     {
         return (new Request)->query($key, $default);
@@ -19,13 +21,24 @@ trait HasRequestHelpers{
         return (new Request)->all();
     }
 
-    protected function only(string ...$keys):array
+    protected function only(string ...$keys): array
     {
         return (new Request)->only(...$keys);
     }
 
-    protected function except(string ...$keys):array
+    protected function except(string ...$keys): array
     {
         return (new Request)->except(...$keys);
     }
+
+    protected function has(string $key): bool
+    {
+        return (new Request)->has($key);
+    }
+
+    protected function isEmpty(): bool
+    {
+        return (new Request)->isEmpty();
+    }
+
 }
